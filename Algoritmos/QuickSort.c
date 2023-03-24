@@ -1,24 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void quickSort(int *array, int low, int pivot){
-
-}
-
 int partition(int *array, int low, int pivot){
-    int i = pivot-1, j = low, aux;
-    while(i>=j+1){
-        if(array[i] < pivot && array[j] >= pivot){
-            aux = array[i];
-            array[i] = array[j];
+    int last_bigger = low - 1, aux;
+    for(int j = low; j < pivot; j++){
+        if(array[j] <= array[pivot]){
+            last_bigger++;
+            aux = array[last_bigger];
+            array[last_bigger] = array[j];
             array[j] = aux;
         }
-        
-        if(array[i] >= pivot) i--;
-        if(array[j] < pivot) j++;
+    }
+    aux = array[last_bigger+1];
+    array[last_bigger+1] = array[pivot];
+    array[pivot] = aux;
+    return last_bigger+1;
+}
+
+void quickSort(int *array, int low, int pivot){
+    if(low < pivot){
+        int low_partition = partition(array, low, pivot);
+        quickSort(array, low, low_partition-1);
+        quickSort(array, low_partition+1, pivot);
     }
 }
 
-int main(){
+void print_array(int *array, int array_size){
+    for(int i = 0; i < array_size; i++) printf("%i ", array[i]);
+    printf("\n");
+}
 
+int main(){
+    int array_size = 10;
+    int *array = malloc(array_size*sizeof(int));
+    for(int i = 10; i > 0; i--) array[10-i] = i;
+    quickSort(array, 0, array_size-1);
+    print_array(array, array_size);
 }

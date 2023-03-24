@@ -1,0 +1,9 @@
+cd "c:\Users\bruni\OneDrive\Documentos\GitHub\CAL0002\Trabalho 02\MergeSort\"
+gcc *c  -o MergeSort
+.\MergeSort
+
+cd "c:\Users\bruni\OneDrive\Documentos\GitHub\CAL0002\Trabalho 02\HeapSort\" 
+gcc *.c -o HeapSort
+.\HeapSort
+
+python -u "c:\Users\bruni\OneDrive\Documentos\GitHub\EDA2001\Trabalho\PlotResults.py"

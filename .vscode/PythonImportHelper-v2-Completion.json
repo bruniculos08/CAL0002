@@ -1,0 +1,119 @@
+[
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "generalPath",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "generalPath = \"C:\\\\Users\\\\bruni\\\\OneDrive\\\\Documentos\\\\GitHub\\\\CAL0002\\\\Trabalho 02\\\\\"\n# (2) Gráfico de teste do Quick Sort:\nwith open(generalPath + \"QuickSort\\\\PerformanceTestCase.txt\", 'r') as f:\n    lines = f.readlines()\nvectorQuickSort = [0 for i in range(len(lines[0].split()))]\nfor line in lines:\n    vector = line.split()\n    for j in range(len(vector)):\n        vectorQuickSort[j] += float(vector[j])/10\nxpointsQuickSort = np.array([x for x in range(0, len(vectorQuickSort))])",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "vectorQuickSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "vectorQuickSort = [0 for i in range(len(lines[0].split()))]\nfor line in lines:\n    vector = line.split()\n    for j in range(len(vector)):\n        vectorQuickSort[j] += float(vector[j])/10\nxpointsQuickSort = np.array([x for x in range(0, len(vectorQuickSort))])\nypointsQuickSort = np.array(vectorQuickSort)\nplt.xticks(range(0, len(xpointsQuickSort)+1, 100))\nplt.plot(xpointsQuickSort, ypointsQuickSort, label=\"QuickSort\", linewidth=0.6)\nplt.title(\"QuickSort\")",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "xpointsQuickSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "xpointsQuickSort = np.array([x for x in range(0, len(vectorQuickSort))])\nypointsQuickSort = np.array(vectorQuickSort)\nplt.xticks(range(0, len(xpointsQuickSort)+1, 100))\nplt.plot(xpointsQuickSort, ypointsQuickSort, label=\"QuickSort\", linewidth=0.6)\nplt.title(\"QuickSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\QuickSort.png\")\nplt.close()",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "ypointsQuickSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "ypointsQuickSort = np.array(vectorQuickSort)\nplt.xticks(range(0, len(xpointsQuickSort)+1, 100))\nplt.plot(xpointsQuickSort, ypointsQuickSort, label=\"QuickSort\", linewidth=0.6)\nplt.title(\"QuickSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\QuickSort.png\")\nplt.close()\nf.close()",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "vectorInsertionSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "vectorInsertionSort = [0 for i in range(len(lines[0].split()))]\nfor line in lines:\n    vector = line.split()\n    for j in range(len(vector)):\n        vectorInsertionSort[j] += float(vector[j])/10\nxpointsInsertionSort = np.array([x for x in range(0, len(vectorInsertionSort))])\nypointsInsertionSort = np.array(vectorInsertionSort)\nplt.plot(xpointsInsertionSort, ypointsInsertionSort, label=\"InsertionSort\", linewidth=0.6)\nplt.title(\"InsertionSort\")\nplt.xlabel(\"Elementos\")",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "xpointsInsertionSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "xpointsInsertionSort = np.array([x for x in range(0, len(vectorInsertionSort))])\nypointsInsertionSort = np.array(vectorInsertionSort)\nplt.plot(xpointsInsertionSort, ypointsInsertionSort, label=\"InsertionSort\", linewidth=0.6)\nplt.title(\"InsertionSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\InsertionSort.png\")\nplt.close()\nf.close()",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "ypointsInsertionSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "ypointsInsertionSort = np.array(vectorInsertionSort)\nplt.plot(xpointsInsertionSort, ypointsInsertionSort, label=\"InsertionSort\", linewidth=0.6)\nplt.title(\"InsertionSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\InsertionSort.png\")\nplt.close()\nf.close()\n# (3) Gráfico de testes do BubbleSort:",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "vectorBubbleSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "vectorBubbleSort = [0 for i in range(len(lines[0].split()))]\nfor line in lines:\n    vector = line.split()\n    for j in range(len(vector)):\n        vectorBubbleSort[j] = float(vector[j])\nxpointsBubbleSort = np.array([x for x in range(0, len(vectorBubbleSort))])\nypointsBubbleSort = np.array(vectorBubbleSort)\nplt.plot(xpointsBubbleSort, ypointsBubbleSort, label=\"BubbleSort\", linewidth=0.6)\nplt.title(\"BubbleSort\")\nplt.xlabel(\"Elementos\")",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "xpointsBubbleSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "xpointsBubbleSort = np.array([x for x in range(0, len(vectorBubbleSort))])\nypointsBubbleSort = np.array(vectorBubbleSort)\nplt.plot(xpointsBubbleSort, ypointsBubbleSort, label=\"BubbleSort\", linewidth=0.6)\nplt.title(\"BubbleSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\BubbleSort.png\")\nplt.close()\nf.close()",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "ypointsBubbleSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "ypointsBubbleSort = np.array(vectorBubbleSort)\nplt.plot(xpointsBubbleSort, ypointsBubbleSort, label=\"BubbleSort\", linewidth=0.6)\nplt.title(\"BubbleSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\BubbleSort.png\")\nplt.close()\nf.close()\n# (8) Plotando todos os gráficos em um só:",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    }
+]

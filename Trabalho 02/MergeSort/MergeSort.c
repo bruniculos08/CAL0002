@@ -1,94 +1,96 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
+#include <sys/time.h>
 
-void printArray(int *array, int n);
-int binarySearch(int *array, int target, int size);
-int *mergeSort(int *array, int start, int end);
-int *merge(int *array, int left, int right, int end);
+void mergeSort(int *array, int start, int end);
+void merge(int *array, int left, int right, int end);
 
-int countSteps = 0;
+struct timeval tv_ini, tv_fim;
+unsigned long time_diff, sec_diff, usec_diff, msec_diff;
 
-int binarySearch(int *array, int target, int size){
-    if(array == NULL) return -1;
-    int left = 0;
-    int right = size-1;
-    int middle = (right + left)/2;
-    do{
-        if(array[middle] == target) return middle;
-        else if(array[middle] > target) right = middle - 1;
-        else left = middle + 1;
-        middle = (left + right)/2;
-    } while (left <= right);
-    return -1;
+void mergeSort(int *array, int start, int end)
+{
+    if (array == NULL || start >= end)
+        return;
+    mergeSort(array, start, (end + start) / 2);
+    mergeSort(array, (end + start) / 2 + 1, end);
+    merge(array, start, (end + start) / 2 + 1, end);
+    return;
 }
 
-int *mergeSort(int *array, int start, int end) {
-    countSteps++;
-    if(array == NULL || start >= end) return array;
-    array = mergeSort(array, start, (end+start)/2);
-    array = mergeSort(array, (end+start)/2 + 1, end);
-    array = merge(array, start, (end+start)/2 + 1, end);
-    return array;   
-}
+void merge(int *array, int left, int right, int end)
+{
+    if (array == NULL)
+        return;
+    else if (right > end || left > right)
+        return;
 
-int *merge(int *array, int left, int right, int end) {
-    if(array == NULL) return NULL;
-    else if(right > end || left > right) return array;
-
-    int *tempArray = malloc((1 + end-left)*sizeof(int));
+    int *tempArray = malloc((1 + end - left) * sizeof(int));
     int l = left, r = right;
-    for(int i = 0; i <= end-left; i++){
-        countSteps++;
-
-        if(l > right-1){
+    for (int i = 0; i <= end - left; i++)
+    {
+        if (l > right - 1)
+        {
             tempArray[i] = array[r];
             r++;
         }
-        else if(r > end){
+        else if (r > end)
+        {
             tempArray[i] = array[l];
             l++;
         }
-        else if(array[l] <= array[r]){
+        else if (array[l] <= array[r])
+        {
             tempArray[i] = array[l];
             l++;
         }
-        else{
+        else
+        {
             tempArray[i] = array[r];
             r++;
         }
     }
-    for(int i = 0; i <= end-left; i++){
-        array[i+left] = tempArray[i];    
-    }
-    return array;
+    for (int i = 0; i <= end - left; i++)
+        array[i + left] = tempArray[i];
+    return;
 }
 
-void printArray(int *array, int n){
-    for(int i = 0; i < n; i++) printf("%i ", array[i]);
-    printf("\n");
+void printTime(FILE *filePointer)
+{
+    fprintf(filePointer, "%lu ", time_diff);
+    time_diff = 0;
 }
 
-void printSteps(FILE *filePointer){
-    fprintf(filePointer, "%i ", countSteps);
-    countSteps = 0;    
-}
-
-void testCase(){
+void testCase()
+{
     FILE *filePointer;
     filePointer = fopen("PerformanceTestCase.txt", "w+");
 
-    for(int i = 0; i < 15; i++){
-        int *array = malloc(sizeof(int)*pow(2, i+1));
-        for(int j = 0; j < pow(2, i+1); j++) array[j] = pow(2, i+1)-j;
-        array = mergeSort(array, 0, pow(2, i+1)-1);
-        printSteps(filePointer);
+    int n = 5000;
+    for (int i = 0; i < n; i++)
+    {
+        int *array = malloc(sizeof(int) * i);
+
+        printf("array %i\n", i);
+
+        for (int j = 0; j < i; j++)
+            array[j] = i - j;
+
+        gettimeofday(&tv_ini, NULL);
+        mergeSort(array, 0, i - 1);
+        gettimeofday(&tv_fim, NULL);
+
+        time_diff = (1000000L * tv_fim.tv_sec + tv_fim.tv_usec) - (1000000L * tv_ini.tv_sec + tv_ini.tv_usec);
+
+        printTime(filePointer);
         free(array);
     }
     fprintf(filePointer, "\n");
 }
 
-
-int main(){
+int main()
+{
     testCase();
 }

@@ -11,7 +11,6 @@ int countSteps = 0;
 void insertionSort(int *array, int n){
     int j, key, keyIndex;
     for(int i = 1; i < n; i++){
-        countSteps++;
         // (1) Navegando pelo vetor pega-se:
         // a. o valor do elemento atual:
         key = array[i];
@@ -55,15 +54,16 @@ void testCase(){
     FILE *filePointer;
     filePointer = fopen("PerformanceTestCase.txt", "w+");
 
-    for(int i = 0; i < 6; i++){
-        int *array = malloc(sizeof(int)*pow(5, i+1));
-        for(int j = 0; j < pow(5, i+1); j++) array[j] = pow(10, i+1)-j;
-        insertionSort(array, pow(10, i+1));
+    for(int i = 0; i < 15; i++){
+        int *array = malloc(sizeof(int)*pow(2, i+1));
+        printf("array %i\n", i);
+        for(int j = 0; j < pow(2, i+1); j++) array[j] = pow(2, i+1)-j;
+        insertionSort(array, pow(2, i+1));
         printSteps(filePointer);
+        free(array);
     }
     fprintf(filePointer, "\n");
 }
-
 
 int main(){
     testCase();

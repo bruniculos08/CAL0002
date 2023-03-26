@@ -1,10 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
+
+int countSteps = 0;
 
 void bubble_sort(int *array, int array_size){
     int aux;
     for(int i=array_size-1; i>=0; i--){
         for(int j=0; j<i; j++){
+            countSteps++;
             if(array[j] > array[j+1]){
                 aux = array[j];
                 array[j] = array[j+1];
@@ -20,10 +24,26 @@ void print_array(int *array, int array_size){
     printf("\n");
 }
 
+void printSteps(FILE *filePointer){
+    fprintf(filePointer, "%i ", countSteps);
+    countSteps = 0;    
+}
+
+void testCase(){
+    FILE *filePointer;
+    filePointer = fopen("PerformanceTestCase.txt", "w+");
+
+    for(int i = 0; i < 15; i++){
+        int *array = malloc(sizeof(int)*pow(2, i+1));
+        printf("array %i\n", i);
+        for(int j = 0; j < pow(2, i+1); j++) array[j] = pow(2, i+1)-j;
+        bubble_sort(array, pow(2, i+1));
+        printSteps(filePointer);
+        free(array);
+    }
+    fprintf(filePointer, "\n");
+}
+
 int main(){
-    int array_size = 10;
-    int *array = malloc(array_size*sizeof(int));
-    for(int i = 10; i > 0; i--) array[10-i] = i;
-    bubble_sort(array, array_size);
-    print_array(array, array_size);
+    testCase();
 }

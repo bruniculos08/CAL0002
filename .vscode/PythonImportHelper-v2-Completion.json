@@ -112,7 +112,34 @@
         "kind": 5,
         "importPath": "Trabalho 02.PlotResults",
         "description": "Trabalho 02.PlotResults",
-        "peekOfCode": "ypointsBubbleSort = np.array(vectorBubbleSort)\nplt.plot(xpointsBubbleSort, ypointsBubbleSort, label=\"BubbleSort\", linewidth=0.6)\nplt.title(\"BubbleSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\BubbleSort.png\")\nplt.close()\nf.close()\n# (8) Plotando todos os gráficos em um só:",
+        "peekOfCode": "ypointsBubbleSort = np.array(vectorBubbleSort)\nplt.plot(xpointsBubbleSort, ypointsBubbleSort, label=\"BubbleSort\", linewidth=0.6)\nplt.title(\"BubbleSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\BubbleSort.png\")\nplt.close()\nf.close()\n# (4) Gráfico de testes do MergeSort:",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "vectorMergeSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "vectorMergeSort = [0 for i in range(len(lines[0].split()))]\nfor line in lines:\n    vector = line.split()\n    for j in range(len(vector)):\n        vectorMergeSort[j] = float(vector[j])\nxpointsMergeSort = np.array([x for x in range(0, len(vectorMergeSort))])\nypointsMergeSort = np.array(vectorMergeSort)\nplt.plot(xpointsMergeSort, ypointsMergeSort, label=\"MergeSort\", linewidth=0.6)\nplt.title(\"MergeSort\")\nplt.xlabel(\"Elementos\")",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "xpointsMergeSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "xpointsMergeSort = np.array([x for x in range(0, len(vectorMergeSort))])\nypointsMergeSort = np.array(vectorMergeSort)\nplt.plot(xpointsMergeSort, ypointsMergeSort, label=\"MergeSort\", linewidth=0.6)\nplt.title(\"MergeSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\MergeSort.png\")\nplt.close()\nf.close()",
+        "detail": "Trabalho 02.PlotResults",
+        "documentation": {}
+    },
+    {
+        "label": "ypointsMergeSort",
+        "kind": 5,
+        "importPath": "Trabalho 02.PlotResults",
+        "description": "Trabalho 02.PlotResults",
+        "peekOfCode": "ypointsMergeSort = np.array(vectorMergeSort)\nplt.plot(xpointsMergeSort, ypointsMergeSort, label=\"MergeSort\", linewidth=0.6)\nplt.title(\"MergeSort\")\nplt.xlabel(\"Elementos\")\nplt.ylabel(\"Etapas\")\nplt.legend(loc=\"upper left\")\nplt.savefig(generalPath + \"Graphics\\\\MergeSort.png\")\nplt.close()\nf.close()\n# (8) Plotando todos os gráficos em um só:",
         "detail": "Trabalho 02.PlotResults",
         "documentation": {}
     }

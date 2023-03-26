@@ -1,54 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
-void printArray(int *array, int start, int size);
+void printArray(int *array, int n);
 int binarySearch(int *array, int target, int size);
 int *mergeSort(int *array, int start, int end);
 int *merge(int *array, int left, int right, int end);
 
-int main(void) {
-    int size;
-    printf("Type array size: ");
-    scanf("%d", &size);
-    int *myArray = malloc(size*sizeof(int));
-
-    printf("Type each array element:\n");
-    for(int i = 0; i < size; i++) scanf("%d", &myArray[i]);
-
-    int flag = -1;
-    int auxNum;
-    while (flag != 0)
-    {
-        printf("0 - Exit\n1 - Binary Search\n2 - Merge Sort\n");
-        scanf("%d", &flag);
-        system("cls");
-        switch (flag)
-        {
-        case 1:
-            printf("Type a number to search: ");
-            scanf("%i", &auxNum);
-            auxNum = binarySearch(myArray, auxNum, size);
-            printf("Found this number in index %d\n", auxNum);
-            break;
-        case 2:
-            printf("Unsorted Array:\n");
-            printArray(myArray, 0, size);
-            myArray = mergeSort(myArray, 0, size-1);
-            printf("Sorted Array:\n");
-            printArray(myArray, 0, size);
-            break;
-        default:
-            break;
-        }
-    }
-
-}
-
-void printArray(int *array, int start, int size){
-    if(array == NULL) return;
-    for (int i = start; i < size; i++) printf("%d ", array[i]);
-    printf("\n");
-}
+int countSteps = 0;
 
 int binarySearch(int *array, int target, int size){
     if(array == NULL) return -1;
@@ -65,6 +24,7 @@ int binarySearch(int *array, int target, int size){
 }
 
 int *mergeSort(int *array, int start, int end) {
+    countSteps++;
     if(array == NULL || start >= end) return array;
     array = mergeSort(array, start, (end+start)/2);
     array = mergeSort(array, (end+start)/2 + 1, end);
@@ -79,6 +39,8 @@ int *merge(int *array, int left, int right, int end) {
     int *tempArray = malloc((1 + end-left)*sizeof(int));
     int l = left, r = right;
     for(int i = 0; i <= end-left; i++){
+        countSteps++;
+
         if(l > right-1){
             tempArray[i] = array[r];
             r++;
@@ -96,6 +58,37 @@ int *merge(int *array, int left, int right, int end) {
             r++;
         }
     }
-    for(int i = 0; i <= end-left; i++) array[i+left] = tempArray[i];
+    for(int i = 0; i <= end-left; i++){
+        array[i+left] = tempArray[i];    
+    }
     return array;
+}
+
+void printArray(int *array, int n){
+    for(int i = 0; i < n; i++) printf("%i ", array[i]);
+    printf("\n");
+}
+
+void printSteps(FILE *filePointer){
+    fprintf(filePointer, "%i ", countSteps);
+    countSteps = 0;    
+}
+
+void testCase(){
+    FILE *filePointer;
+    filePointer = fopen("PerformanceTestCase.txt", "w+");
+
+    for(int i = 0; i < 15; i++){
+        int *array = malloc(sizeof(int)*pow(2, i+1));
+        for(int j = 0; j < pow(2, i+1); j++) array[j] = pow(2, i+1)-j;
+        array = mergeSort(array, 0, pow(2, i+1)-1);
+        printSteps(filePointer);
+        free(array);
+    }
+    fprintf(filePointer, "\n");
+}
+
+
+int main(){
+    testCase();
 }

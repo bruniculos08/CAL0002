@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+int countSteps = 0;
 
 int partition(int *array, int low, int pivot){
     int last_bigger = low - 1, aux;
     for(int j = low; j < pivot; j++){
+        countSteps++;
         if(array[j] <= array[pivot]){
             last_bigger++;
             aux = array[last_bigger];
@@ -18,6 +22,7 @@ int partition(int *array, int low, int pivot){
 }
 
 void quickSort(int *array, int low, int pivot){
+    countSteps++;
     if(low < pivot){
         int low_partition = partition(array, low, pivot);
         quickSort(array, low, low_partition-1);
@@ -30,10 +35,26 @@ void print_array(int *array, int array_size){
     printf("\n");
 }
 
+void printSteps(FILE *filePointer){
+    fprintf(filePointer, "%i ", countSteps);
+    countSteps = 0;    
+}
+
+void testCase(){
+    FILE *filePointer;
+    filePointer = fopen("PerformanceTestCase.txt", "w+");
+
+    for(int i = 0; i < 15; i++){
+        int *array = malloc(sizeof(int)*pow(2, i+1));
+        printf("array %i\n", i);
+        for(int j = 0; j < pow(2, i+1); j++) array[j] = pow(2, i+1)-j;
+        quickSort(array, 0, pow(2, i+1));
+        printSteps(filePointer);
+        free(array);
+    }
+    fprintf(filePointer, "\n");
+}
+
 int main(){
-    int array_size = 10;
-    int *array = malloc(array_size*sizeof(int));
-    for(int i = 10; i > 0; i--) array[10-i] = i;
-    quickSort(array, 0, array_size-1);
-    print_array(array, array_size);
+    testCase();
 }

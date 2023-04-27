@@ -15,26 +15,21 @@ int left_son(int i){
 int right_son(int i){
     return 2*i+2;
 }
-
 void max_heapfy(int *array, int array_size, int index){
     int maior = index;
     int temp;
-    // Como começamos da metade do vetor, note que, se o vetor tiver tamanho ímpar, o primeiro índice pai...
-    // ... a ser verificado por esta função terá 2 filho (devido ao arredondamento da divisão) e caso o vetor...
-    // ... tenha tamanho ímpar:
-    if(right_son(index) <= array_size-1 && array[right_son(index)] >= array[left_son(index)] 
-    && array[right_son(index)] > array[index]){
-        maior = right_son(index);
-        temp = array[index];
-        array[index] = array[right_son(index)];
-        array[right_son(index)] = temp;
+    
+    if(left_son(index) >= array_size) return;
+    else if(right_son(index) < array_size && array[left_son(index)] <= array[right_son(index)]) maior = right_son(index);
+    else maior = left_son(index);
+
+    if(array[maior] > array[index]){
+        temp = array[maior];
+        array[maior] = array[index];
+        array[index] = temp;
     }
-    else if(array[index] < array[left_son(index)]){
-        maior = left_son(index);
-        temp = array[index];
-        array[index] = array[left_son(index)];
-        array[left_son(index)] = temp;
-    }
+    
+    if(maior != index) max_heapfy(array, array_size, maior);
 }
 
 void build_max_heap(int *array, int array_size){
@@ -45,15 +40,15 @@ void build_max_heap(int *array, int array_size){
     }
 }
 
-void heap(int *array, int array_size){
+void heapSort(int *array, int array_size){
     int temp;
+    build_max_heap(array, array_size);
     for(int i = array_size; i > 0; i--){
-        build_max_heap(array, i);
         temp = array[0];
         array[0] = array[i-1];
         array[i-1] = temp;
+        max_heapfy(array, i-1, 0);
     }
-    return array;
 }
 
 void print_array(int *array, int array_size){

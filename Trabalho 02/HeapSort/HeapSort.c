@@ -34,7 +34,8 @@ void max_heapfy(int *array, int array_size, int index){
         array[maior] = array[index];
         array[index] = temp;
     }
-    max_heapfy(array, array_size, maior);
+    
+    if(maior != index) max_heapfy(array, array_size, maior);
 }
 
 void build_max_heap(int *array, int array_size){

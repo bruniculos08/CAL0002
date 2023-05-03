@@ -15,7 +15,7 @@ int **createMatrix(int rows, int columns){
         matrix[i] = (int *)malloc(columns*sizeof(int));
 
         // (2.1) Setando os elementos da matriz iguais à zero para inserção (por meio de adição) das arestas na função createGraph:
-        for(int j=0; j<columns; j++) matrix[i][j] = 0;
+        for(int j=0; j<columns; j++) matrix[i][j] = -1;
     }
     return matrix;
 }
@@ -32,18 +32,18 @@ int **createGraph(int *n){
     if(feof(filePointer)) return matrix;
 
     // (2) Loop de acordo para inserir as arestas:
-    int i, j;
+    int i, j, weight;
     do
     {
       // (2.1) Ler linha de aresta e pular para a próxima linha do arquivo:
-      fscanf(filePointer, "%i %i \n", &i, &j);
+      fscanf(filePointer, "%i %i %i\n", &i, &j, &weight);
 
       // (2.2) Há a adição nos elementos simétricos da matriz (tendo em vista que a matriz é simétrica):
       if(i != j){
-          matrix[i-1][j-1] += 1;
-          matrix[j-1][i-1] += 1;
+          matrix[i-1][j-1] += weight;
+          matrix[j-1][i-1] += weight;
       }
-      else matrix[i-1][j-1] += 1;
+      else matrix[i-1][j-1] += weight;
       
     } while (!feof(filePointer));
     fclose(filePointer);
@@ -287,6 +287,7 @@ void tour(int **matrix, int n, int c) {
 void dijkstra(int **matrix, int n, int s, int t){
   int inf = __INT32_MAX__;
     
+  printf("Running Dijkstra...\n");
   // Obs.: como meu código inteiro está utilizando a numeração dos vetores como iniciando em 1 esta parte...
   // ... do código está seguindo o mesmo padrão;
 
@@ -332,7 +333,8 @@ void dijkstra(int **matrix, int n, int s, int t){
   int v;
 
   // Enquanto o vetor atual a ser analisado não for o final:
-  while(z != t){
+  while(z != t && z != -1){
+    printf("Running Dijkstra (z = %i)...\n", z);
     for(int i = 0; i < n; i++){
       // Se a marca do vetor é permanente não se deve analisar o vetor novamente:
       if(temporarios[i] == 0) continue;
@@ -340,7 +342,7 @@ void dijkstra(int **matrix, int n, int s, int t){
       v = i+1;
       
       // Verificando se marca(v) > marca(z) + dist(z,v):
-      if(tabela[v-1][0] > tabela[z-1][0] + matrix[z-1][v-1]){
+      if(matrix[z-1][v-1] != -1 && tabela[v-1][0] > tabela[z-1][0] + matrix[z-1][v-1]){
         // Se a condição for válida muda marca(z) para marca(z) + dist(z,v):
         tabela[v-1][0] = tabela[z-1][0] + matrix[z-1][v-1];
         // Coloca z como pai de v:
@@ -353,11 +355,13 @@ void dijkstra(int **matrix, int n, int s, int t){
     temporarios[z-1] = 0;
   }
 
+  printf("Printando caminho (ordem inversa): ");
   // Imprimindo caminho na ordem inversa:
-  while(z != s){
-    printf("%i ", z);
-    z = tabela[z-1][1];
+  while(t != -1){
+    printf("%i ", t);
+    t = tabela[t-1][1];
   }
+  printf("\n");
   
 }
 

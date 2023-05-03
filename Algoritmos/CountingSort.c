@@ -8,19 +8,19 @@ int *countingSort(int *A, int n){
     int m = get_max(A, n);
     int *B;
     int *C;
-    B = malloc(n*sizeof(int));
-    C = malloc((m+1)*sizeof(int));
+    B = malloc(n*sizeof(int));      // O(k)
+    C = malloc((m+1)*sizeof(int));  // O(n)
     
-    for(int j = 0; j < m+1; j++){
+    for(int j = 0; j < m+1; j++){ // O(k)
         C[j] = 0;
     }
 
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n; i++){ // O(n)
         C[A[i]] ++;
     }
 
     int i = -1;
-    for(int j = 0; j < m+1; j++){
+    for(int j = 0; j < m+1; j++){ // O(k + n) pois o while roda no máximo n vezes e este looping roda k vezes;
         while(C[j] > 0){
             i++;
             B[i] = j;

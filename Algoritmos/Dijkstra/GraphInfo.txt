@@ -1,9 +1,8 @@
 8
-a b c d e f g h
+a b c d e f h g
 a b 1
-a c 7
+a c 1
 b c 1
 b f 1
 c d 1
-c e 10
-h g 1
+c e 1

@@ -11,12 +11,14 @@ int main() {
   int p;
   do {
     do {
-      printf("\n[1]: Imprimir lista de adjacências");
-      printf("\n[2]: Dijkstra");
-      printf("\n[3]: BFS");
-      printf("\n[4]: DFS");
-      printf("\n[5]: Encontrar todos os componentes conexos via BFS");
-      printf("\n[0]: Sair\n\n");
+      fflush(stdin);
+      cout << "\n[1]: Imprimir lista de adjacências";
+      cout << "\n[2]: Dijkstra";
+      cout << "\n[3]: BFS";
+      cout << "\n[4]: DFS";
+      cout << "\n[5]: Encontrar todos os componentes conexos via BFS";
+      cout << "\n[6]: Encontrar todos os componentes conexos via DFS";
+      cout << "\n[0]: Sair\n";
       scanf("%i", &p);
       system("clear");
     } while (p < 0 || p > 17);
@@ -45,7 +47,12 @@ int main() {
         DFS(G, vi);
         break;
     case 5:
-        printComponents(&G);
+        printComponentsBFS(G);
+        for(auto v : G.visited) v.second = false;
+        break;
+    case 6:
+        printComponentsDFS(G);
+        for(auto v : G.visited) v.second = false;
         break;
     }
     fflush(stdin);

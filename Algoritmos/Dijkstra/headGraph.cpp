@@ -98,7 +98,7 @@ void dijkstra(Graph G, char s, char t){
   // ... ainda não tem em sua marca de distância o menor caminho, porém quando se torna permanente (não temporário)...
   // ... a distância computada (salva na tabela) até este vértice será a mínima;
 
-  // A distância até s é 0 o mesmo não tem pai poisé o vértice inicial:
+  // A distância até s é 0 o mesmo não tem pai pois é o vértice inicial:
   table.insert(make_pair(s, make_pair(0, '#')));
   // O vértice s é visitado pois é o vértice inicial:
   G.visited[s] = true;
@@ -209,7 +209,7 @@ void DFS(Graph G, char s){
   for(auto v : G.visited) v.second = false;
 }
 
-// (5) DFS para retornar componete conexa:
+// (5) BFS para retornar componete conexa:
 vector<char> BFS_component(Graph *G, char s){
   std::queue<char> fila;
   std::vector<char> component;
@@ -231,6 +231,29 @@ vector<char> BFS_component(Graph *G, char s){
   } while(fila.empty() == false);
 
   return component;
+}
+
+// (6) DFS para determinar componenete conexa:
+vector<char> DFS_component(Graph G, char s){
+  std::stack<int> pilha;
+
+  char z;
+  pilha.push(s);
+  do{
+    z = pilha.top();
+    pilha.pop();
+    G.visited[z] = true;
+    for(auto v : G.V[z].adjacency_list){
+      if(G.visited[v.first] == false){
+        G.visited[v.first] = true;
+        pilha.push(v.first);
+      }
+    }
+    std::cout << "Vértice " << z << " visitado;" << std::endl;
+  } while(pilha.empty() == false);
+
+  // Resetando visited:
+  for(auto v : G.visited) v.second = false;
 }
 
 void printOneComponent(vector<char> component){

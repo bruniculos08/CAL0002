@@ -3,20 +3,18 @@
 #include "headGraph.h"
 // g++ Graph.cpp headGraph.cpp -o Graph && ./Graph
 
+using namespace std;
+
 int main() {
-  int n = 0;
-  int **matrix = createGraph(&n);
-  int p, c;
-  int s, t;
+  Graph G = createGraph();
+  char vi, vj;
+  int p;
   do {
     do {
-      printf("\n[1]: Imprimir matriz de adjacências");
-      printf("\n[2]: Remover arestas");
-      printf("\n[3]: Remover um vértice");
-      printf("\n[4]: Salvar grafo");
-      printf("\n[5]: Dijkstra");
-      printf("\n[6]: BFS");
-      printf("\n[7]: DFS");
+      printf("\n[1]: Imprimir lista de adjacências");
+      printf("\n[2]: Dijkstra");
+      printf("\n[3]: BFS");
+      printf("\n[4]: DFS");
       printf("\n[0]: Sair\n\n");
       scanf("%i", &p);
       system("clear");
@@ -24,42 +22,28 @@ int main() {
 
     switch (p) {
     case 1:
+      printGraph(G);
       printf("\n");
-      printMatrix(matrix, n, n);
       break;
     case 2:
-      matrix = removeEdges(matrix, n);
-      break;
-    case 3:
-      matrix = removeVertice(matrix, &n);
-      n--;
-      break;
-    case 4:
-      saveGraph(matrix, n);
-      break;
-    case 5:
+        fflush(stdin);
         printf("Digite o vértice inicial: ");
-        scanf("%i", &s); 
+        cin >> vi;
         printf("Digite o vértice final: ");
-        scanf("%i", &t);
-        if(s > n || t > n || s <= 0 || t <= 0) printf("Vértice inválido.\n");
-        else dijkstra(matrix, n, s, t);
+        cin >> vj;
+        dijkstra(G, vi, vj);
         break;
-    case 6:
+    case 3:
         printf("Digite o vértice inicial: ");
-        scanf("%i", &s); 
-        if(s > n || s <= 0) printf("Vértice inválido.\n");
-        else BFS(matrix, n, s);
+        cin >> vi;
+        BFS(G, vi);
         break;
-    case 7:
+    case 4:
         printf("Digite o vértice inicial: ");
-        scanf("%i", &s); 
-        if(s > n || s <= 0) printf("Vértice inválido.\n");
-        else DFS(matrix, n, s);
+        cin >> vi;
+        DFS(G, vi);
         break;
     }
     fflush(stdin);
   } while (p != 0);
-
-  printf("\nObrigado por usar nosso programa !!\n");
 }

@@ -1,14 +1,28 @@
-int **createMatrix(int rows, int columns);
-int **createGraph(int *n);
+#include <bits/stdc++.h>
+#include <vector>
 
-int **removeEdges(int **matrix, int n);
-int **removeVertice(int **matrix, int *n);
+using namespace std;
 
-void printMatrix(int **matrix, int rows, int columns);
-void saveGraph(int **matrix, int n);
+struct vertice{
+  char name;
+  vector<pair<char, int>> adjacency_list;
+};
 
-void dijkstra(int **matrix, int n, int s, int t);
-int getMinIndex(int **tabela, int *temporarios, int n);
+class Graph{
+  public:
+    map<char, bool> visited;
+    map<char, vertice> V;
 
-void BFS(int **matrix, int n, int s);
-void DFS(int **matrix, int n, int s);
+    void addVertice(char name);
+    void addEdge(char vi, char vj, int weight);
+};
+
+Graph createGraph();
+void printGraph(Graph G);
+
+
+void dijkstra(Graph G, char s, char t);
+void BFS(Graph G, char s);
+void DFS(Graph G, char s);
+
+bool compareTuple(tuple<char, int> a, tuple<char, int> b);

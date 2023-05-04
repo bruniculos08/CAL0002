@@ -15,6 +15,7 @@ int main() {
       printf("\n[2]: Dijkstra");
       printf("\n[3]: BFS");
       printf("\n[4]: DFS");
+      printf("\n[5]: Encontrar todos os componentes conexos via BFS");
       printf("\n[0]: Sair\n\n");
       scanf("%i", &p);
       system("clear");
@@ -42,6 +43,9 @@ int main() {
         printf("Digite o vértice inicial: ");
         cin >> vi;
         DFS(G, vi);
+        break;
+    case 5:
+        printComponents(&G);
         break;
     }
     fflush(stdin);

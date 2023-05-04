@@ -24,5 +24,8 @@ void printGraph(Graph G);
 void dijkstra(Graph G, char s, char t);
 void BFS(Graph G, char s);
 void DFS(Graph G, char s);
+vector<char> BFS_component(Graph *G, char s);
 
+void printComponents(Graph *G);
+void printOneComponent(vector<char> component);
 bool compareTuple(tuple<char, int> a, tuple<char, int> b);

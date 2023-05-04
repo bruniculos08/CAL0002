@@ -139,18 +139,23 @@ void dijkstra(Graph G, char s, char t){
     }
   }
 
-  cout << "Printando caminho: "; 
-  stack<char> path;
-  while(t != '#'){
-    path.push(t);
-    t = table[t].second;
-  }
+  
+  if(table[t].second == '#') cout << "Não há caminho de " << s << " até " << t << "\n";
+  else{
+    cout << "Printando caminho: "; 
+    stack<char> path;
+    while(t != '#'){
+      path.push(t);
+      t = table[t].second;
+    }
 
-  while(path.empty() != true){
-    cout << path.top() << " ";
-    path.pop();
+
+    while(path.empty() != true){
+      cout << path.top() << " ";
+      path.pop();
+    }
+    cout << "\n";
   }
-  cout << "\n";
 
 
   // Resetando visited:
@@ -202,4 +207,42 @@ void DFS(Graph G, char s){
 
   // Resetando visited:
   for(auto v : G.visited) v.second = false;
+}
+
+// (5) DFS para retornar componete conexa:
+vector<char> BFS_component(Graph *G, char s){
+  std::queue<char> fila;
+  std::vector<char> component;
+
+  char z;
+  fila.push(s);
+  do{
+    z = fila.front();
+    fila.pop();
+    (*G).visited[z] = true;
+    component.push_back(z);
+    
+    for(auto v : (*G).V[z].adjacency_list){
+      if((*G).visited[v.first] == false){
+        (*G).visited[v.first] = true;
+        fila.push(v.first);     
+      }
+    }
+  } while(fila.empty() == false);
+
+  return component;
+}
+
+void printOneComponent(vector<char> component){
+  cout << "Componente Conexo: ";
+  for(char v : component) cout << v << " ";
+  cout << "\n";
+}
+
+void printComponents(Graph *G){
+  for(auto v : (*G).visited){
+    if(v.second == false) printOneComponent(BFS_component(G, v.first)); 
+  }
+
+  for(auto v : (*G).visited) v.second = false;
 }

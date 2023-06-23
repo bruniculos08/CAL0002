@@ -66,7 +66,7 @@ int numSquaresBackPack(int n){
         for(int j = 1; j <= weights.size(); j++){
             if(X < weights[j]) V[X][j] = V[X][j-1];
             else{
-                int pick = V[X-weights[j-1]][j-1] + values[j-1];
+                int pick = V[X-weights[j]][j] + values[j];
                 int not_pick = V[X][j-1];
                 V[X][j] = max(pick, not_pick);
             }

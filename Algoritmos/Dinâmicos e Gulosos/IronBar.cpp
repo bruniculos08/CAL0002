@@ -47,12 +47,12 @@ void printCuts(vector<int> &cuts){
 
     Portanto como T(n) <= 2^n + n então T(n) ∈ O(2^n) 
 */
-int BarCutRecursive(vector<int> *values, int size, int max_profit, vector<int> *cuts){
+int BarCutRecursive(vector<int> *values, int size, vector<int> *cuts){
 
     int profit;
-    max_profit = 0;
+    int max_profit = 0;
     for(int i = 1; i <= size; i++){
-        profit = (*values)[i-1] + BarCutRecursive(values, size-i, 0, cuts);
+        profit = (*values)[i-1] + BarCutRecursive(values, size-i, cuts);
         if(max_profit < profit){
             max_profit = profit;
             (*cuts)[size] = i;
@@ -211,7 +211,7 @@ int main(){
 
     vector<int> cuts (values.size()+1);
 
-    result = BarCutRecursive(&values, values.size(), values.size(), &cuts);
+    result = BarCutRecursive(&values, values.size(), &cuts);
     cout << "Max( p_" << values.size() << " ) = " << result << endl;
     
     result = BarCutTopDown(values, values.size());

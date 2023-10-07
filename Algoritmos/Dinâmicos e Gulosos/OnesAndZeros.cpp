@@ -34,7 +34,7 @@ int findMaxForm(vector<string>& strs, int m, int n) {
     // ... 3D pois poderiamos usar auto &x : strs no loop abaixo como visto em uma solução de outro usuário)
     // j (m) representa o número de 0's de capacidade
     // k (n) representa o número de 1's de capacidade
-    for(int i = 1; i < strs.size() + 1; i++){
+    for(int i = 1; i < (int) strs.size() + 1; i++){
        for(int j = 0; j <= m; j++){
            for(int k = 0; k <= n; k++){
                 if(v0[i-1] <= j and v1[i-1] <= k)
